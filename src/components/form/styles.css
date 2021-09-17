@@ -1,0 +1,80 @@
+form {
+  box-sizing: border-box;
+  padding: 5% 10%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 60vw;
+  height: 85vh;
+}
+.formBox input {
+  margin: 10px 0;
+  padding: 3px 5px;
+  display: block;
+  height: 50px;
+  background-color: #1f1f1f;
+  color: white;
+  border: 1px solid gray;
+
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.formBox input::placeholder {
+  margin: 10px auto;
+  padding: 3px 10px;
+  font-size: 18px;
+}
+
+.formBox input:focus {
+  background-color: #111111ad;
+  color: white;
+  box-shadow: 0 0 2px 2px rgba(240, 255, 240, 0.795);
+  font-size: 16px;
+}
+
+.passwordBox {
+  box-sizing: border-box;
+  /* width: 80%; */
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #1f1f1f;
+}
+
+.passwordBox input {
+  margin: 10px 0;
+}
+
+.termsBox {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+.termsBox p {
+  margin: 0 10px;
+}
+
+.termsBox input {
+  height: 16px;
+  margin: 10px 10px;
+}
+
+.link {
+  margin: 5px;
+  text-align: end;
+  font-size: 15px;
+}
+.link:hover {
+  color: royalblue;
+}
+button {
+  height: 60px;
+  background-color: #313131;
+  color: rgba(255, 255, 255, 0.733);
+  font-size: 20px;
+  font-weight: bold;
+}
