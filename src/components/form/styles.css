@@ -12,7 +12,7 @@ form {
   margin: 10px 0;
   padding: 3px 5px;
   display: block;
-  height: 50px;
+  min-height: 50px;
   background-color: #1f1f1f;
   color: white;
   border: 1px solid gray;
@@ -44,6 +44,7 @@ form {
 
 .passwordBox input {
   margin: 10px 0;
+  min-height: 50px;
 }
 
 .termsBox {
@@ -81,7 +82,7 @@ button {
 .errorMsg {
   text-align: left;
   margin: 0;
-  height: 18px;
+  min-height: 18px;
   font-size: 16px;
   font-weight: normal;
   color: rgb(231, 103, 129);
