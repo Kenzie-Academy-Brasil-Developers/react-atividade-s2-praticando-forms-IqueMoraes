@@ -2,8 +2,11 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./styles.css";
+import { useState } from "react";
 
 export default function Form() {
+  const [results, setResults] = useState(false);
+
   const formSchema = yup.object().shape({
     user: yup.string().required("Nome de usuário obrigatório"),
     fullname: yup.string().required("Nome completo obrigatório"),
@@ -33,79 +36,95 @@ export default function Form() {
   } = useForm({ resolver: yupResolver(formSchema) });
 
   const imprimeNoConsole = (data) => {
-    console.log(data);
+    setResults(data);
   };
   console.log(errors);
 
   return (
-    <div className="formBox">
-      <h3>Formulário de inscrição</h3>
-      <form onSubmit={handleSubmit(imprimeNoConsole)}>
-        <input
-          placeholder="Escolha um nome para Usuário"
-          {...register("user")}
-        />
-        {<p className="errorMsg">{errors.user && errors.user.message}</p>}
-        <input
-          placeholder="Digite seu nome completo"
-          {...register("fullname")}
-        />
-        {
-          <p className="errorMsg">
-            {errors.fullname && errors.fullname.message}
-          </p>
-        }
-
-        <input
-          placeholder="Escolha um endereço de E-mail"
-          {...register("email")}
-        />
-        {<p className="errorMsg">{errors.email && errors.email.message}</p>}
-
-        <input
-          placeholder="Confirme seu E-mail"
-          {...register("emailconfirm")}
-        />
-        {
-          <p className="errorMsg">
-            {errors.emailconfirm && errors.emailconfirm.message}
-          </p>
-        }
-        <div className="passwordBox">
-          <div className="alertPasswordBox">
+    <>
+      {!results ? (
+        <div className="formBox">
+          <h3>Formulário de inscrição</h3>
+          <form onSubmit={handleSubmit(imprimeNoConsole)}>
             <input
-              type="password"
-              placeholder="Crie sua senha difícil"
-              {...register("password")}
+              placeholder="Escolha um nome para Usuário"
+              {...register("user")}
+            />
+            {<p className="errorMsg">{errors.user && errors.user.message}</p>}
+            <input
+              placeholder="Digite seu nome completo"
+              {...register("fullname")}
             />
             {
               <p className="errorMsg">
-                {errors.password && errors.password.message}
+                {errors.fullname && errors.fullname.message}
               </p>
             }
-          </div>
-          <div className="alertPasswordBox">
+
             <input
-              type="password"
-              placeholder="Confirme sua senha"
-              {...register("passwordconfirm")}
+              placeholder="Escolha um endereço de E-mail"
+              {...register("email")}
+            />
+            {<p className="errorMsg">{errors.email && errors.email.message}</p>}
+
+            <input
+              placeholder="Confirme seu E-mail"
+              {...register("emailconfirm")}
             />
             {
               <p className="errorMsg">
-                {errors.passwordconfirm && errors.passwordconfirm.message}
+                {errors.emailconfirm && errors.emailconfirm.message}
               </p>
             }
-          </div>
-        </div>
-        <div className="termsBox">
-          <input type="checkbox" {...register("terms")} />
-          <p>Eu aceito os termos de uso da aplicação </p>
-          {<p className="errorMsg">{errors.terms && errors.terms.message}</p>}
-        </div>
+            <div className="passwordBox">
+              <div className="alertPasswordBox">
+                <input
+                  type="password"
+                  placeholder="Crie sua senha difícil"
+                  {...register("password")}
+                />
+                {
+                  <p className="errorMsg">
+                    {errors.password && errors.password.message}
+                  </p>
+                }
+              </div>
+              <div className="alertPasswordBox">
+                <input
+                  type="password"
+                  placeholder="Confirme sua senha"
+                  {...register("passwordconfirm")}
+                />
+                {
+                  <p className="errorMsg">
+                    {errors.passwordconfirm && errors.passwordconfirm.message}
+                  </p>
+                }
+              </div>
+            </div>
+            <div className="termsBox">
+              <input type="checkbox" {...register("terms")} />
+              <p>Eu aceito os termos de uso da aplicação </p>
+              {
+                <p className="errorMsg">
+                  {errors.terms && errors.terms.message}
+                </p>
+              }
+            </div>
 
-        <button type="submit">REALIZAR CADASTRO</button>
-        <p className="link">Já possui um cadastro?</p>
-      </form>
-    </div>
+            <button type="submit">REALIZAR CADASTRO</button>
+            <p className="link">Já possui um cadastro?</p>
+          </form>
+        </div>
+      ) : (
+        <div>
+          <p>Usuário: {results.user}</p>
+          <p>Nome: {results.fullname}</p>
+          <p>E-mail: {results.email}</p>
+          <p>Senha: {results.password}</p>
+          <button onClick={() => setResults(false)}>Voltar</button>
+        </div>
+      )}
+    </>
   );
 }
